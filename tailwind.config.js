@@ -13,9 +13,9 @@ module.exports = {
       margin: px0_200,
       padding: px0_200,
       maxWidth: px0_1000,
-      borderWidth:px0_100,
-      height: px0_1000
+      borderWidth: px0_100,
+      height: px0_1000,
     },
   },
   plugins: [],
-}
+};

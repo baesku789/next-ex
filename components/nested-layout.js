@@ -1,5 +1,3 @@
 export default function NestedLayout() {
-	return (
-		<h2>nested</h2>
-	)
+  return <h2>nested</h2>;
 }
