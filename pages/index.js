@@ -9,7 +9,7 @@ function HomePage() {
 	useEffect(() => {
 		// Always do navigations after the first render
 		router.push('/?counter=10', undefined, { shallow: true });
-	}, []);
+	}, [router]);
 
 	return <div>Welcome to Next.js!</div>;
 }

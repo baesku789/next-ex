@@ -26,6 +26,8 @@
 		"@commitlint/types": "^17.0.0",
 		"@types/react": "^18.0.17",
 		"autoprefixer": "^10.4.8",
+		"eslint": "8.23.0",
+		"eslint-config-next": "12.2.5",
 		"husky": "^8.0.0",
 		"postcss": "^8.4.16",
 		"prettier": "2.7.1",

@@ -13,7 +13,7 @@ function Todo({ todos }) {
 
 	return (
 		<>
-			{todos.map((todo) => {
+			{todos.map((todo, index) => {
 				const { properties } = todo;
 				const created_time = properties['등록시간'].id;
 				const status = properties['상태'].id;
@@ -21,6 +21,7 @@ function Todo({ todos }) {
 
 				return (
 					<Todo
+						key={index}
 						title={title}
 						status={status}
 						created_time={created_time}
