@@ -1,17 +1,15 @@
 import { GetStaticProps } from 'next';
-import axios from 'axios';
+import { dehydrate, QueryClient } from '@tanstack/query-core';
+import { getKosisList } from '../lib/api';
+import { AxiosResponse, KosisListItem } from '../lib/api/api';
+import { useQuery } from '@tanstack/react-query';
 
-type List = {
-	LIST_NM: string;
-	VW_CD: string;
-	VW_NM: string;
-};
+const Kosis = () => {
+	const { data }: AxiosResponse<KosisListItem[]> = useQuery(
+		['kosisList'],
+		getKosisList
+	);
 
-type Response = {
-	data: List[];
-};
-
-const kosis = ({ data }: Response) => {
 	return (
 		<div className={'m-auto max-w-screen-sm h-[calc(50vh)] overflow-auto'}>
 			<div className={'sticky top-0 bg-white'}>
@@ -35,15 +33,15 @@ const kosis = ({ data }: Response) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-	const { data, status } = await axios.get<Response>(
-		'https://kosis.kr/openapi/statisticsList.do?method=getList&apiKey=MzJkNDQyM2RiYjUzMGQxOWYwOGQ4ODlkMmE1ZTczZDQ=&vwCd=MT_ZTITLE&parentListId=J1&format=json&jsonVD=Y&version=v2_1'
-	);
+	const queryClient = new QueryClient();
+
+	await queryClient.prefetchQuery(['kosisList'], getKosisList);
 
 	return {
 		props: {
-			data,
+			dehydratedState: dehydrate(queryClient),
 		},
 	};
 };
 
-export default kosis;
+export default Kosis;
