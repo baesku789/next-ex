@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { KosisListItem } from './api';
 
 const instance = axios.create({
 	baseURL: 'https://kosis.kr/openapi',
@@ -8,19 +9,18 @@ const instance = axios.create({
 });
 
 export async function getKosisList() {
-	const { data, status } = await instance.get<Response>(
-		'/statisticsList.do',
-		{
-			params: {
-				method: 'getList',
-				format: 'json',
-				jsonVD: 'Y',
-				vwCd: 'MT_ZTITLE',
-				parentListId: 'J1',
-				version: 'v2_1',
-			},
-		}
-	);
+	const { data } = await instance.get<KosisListItem[]>('/statisticsList.do', {
+		params: {
+			method: 'getList',
+			format: 'json',
+			jsonVD: 'Y',
+			vwCd: 'MT_ZTITLE',
+			parentListId: 'J1',
+			version: 'v2_1',
+		},
+	});
+
+	console.log(`data ${JSON.stringify(data)}`);
 
 	return data;
 }

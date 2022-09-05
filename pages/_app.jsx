@@ -11,7 +11,19 @@ export default function MyApp({ Component, pageProps }) {
 	// Use the layout defined at the page level, if available
 	const getLayout = Component.getLayout || ((page) => page);
 
-	const [queryClient] = useState(() => new QueryClient());
+	const [queryClient] = useState(
+		() =>
+			new QueryClient({
+				defaultOptions: {
+					queries: {
+						retry: false,
+						retryOnMount: false,
+						refetchOnMount: false,
+						refetchOnWindowFocus: false,
+					},
+				},
+			})
+	);
 
 	return getLayout(
 		<QueryClientProvider client={queryClient}>
