@@ -1,25 +1,17 @@
 import Layout from '../components/layout';
 import NestedLayout from '../components/nested-layout';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import Link from 'next/link';
 
 function HomePage() {
-	const router = useRouter();
-
-	useEffect(() => {
-		// Always do navigations after the first render
-		router.push('/?counter=10', undefined, { shallow: true });
-	}, [router]);
-
-	return <div>Welcome to Next.js!</div>;
+	return (
+		<nav>
+			<Link href={'/about'}>About</Link>
+		</nav>
+	);
 }
 
 HomePage.getLayout = function getLayout(page) {
-	return (
-		<Layout>
-			<NestedLayout>{page}</NestedLayout>
-		</Layout>
-	);
+	return <Layout>{page}</Layout>;
 };
 
 export default HomePage;
