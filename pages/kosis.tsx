@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next';
-import { dehydrate, QueryClient } from '@tanstack/query-core';
 import { getKosisList } from '../lib/api';
-import { useQuery } from '@tanstack/react-query';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const queryClient = new QueryClient();
