@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import { getESIList } from '../lib/api';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { generateKey } from '../lib/utils';
+import Input from '../components/input/Input';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const queryClient = new QueryClient();
@@ -20,7 +21,7 @@ function ESI() {
 	const [startDate, setStartDate] = useState(202207);
 	const [endDate, setEndDate] = useState(202208);
 
-	const { data, isError } = useQuery(['ESIList'], () =>
+	const { data, isError, refetch } = useQuery(['ESIList'], () =>
 		getESIList(startDate, endDate)
 	);
 
@@ -41,26 +42,28 @@ function ESI() {
 	}
 
 	return (
-		<div>
+		<div className={'flex items-center flex-col'}>
 			<h1>경제심리지수</h1>
-			<div className={'flex flex-col'}>
-				<input
+			<div className={'flex flex-col my-20'}>
+				<Input
 					type="text"
 					placeholder={'202207'}
 					onChange={onDateChange}
+					fontSize={'16px'}
 				/>
-				<input
+				<Input
 					type="text"
 					placeholder={'202208'}
 					onChange={onDateChange}
 				/>
 			</div>
-			<div>
+			<button onClick={() => refetch()}>검색</button>
+			<div className={'flex'}>
 				{data.map((el, index) => {
 					return (
 						<div
 							key={generateKey(index)}
-							className={'my-10'}
+							className={'mx-10 first:ml-0'}
 						>
 							<div>{el.PRD_DE}</div>
 							<div>
