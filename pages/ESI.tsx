@@ -2,10 +2,8 @@ import React, { ChangeEvent, useState } from 'react';
 import { GetStaticProps } from 'next';
 import { getESIList } from '../lib/api';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import { generateKey } from '../lib/utils';
 import Input from '../components/input/Input';
 import Button from '../components/button/Button';
-import { ESIListItem } from '../lib/api/api';
 import ESIList from '../components/ESI/ESIList';
 
 export const getStaticProps: GetStaticProps = async () => {

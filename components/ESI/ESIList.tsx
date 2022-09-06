@@ -9,7 +9,7 @@ interface ESIListProps {
 }
 
 const ESIList = ({isError, data, isRefetching}:ESIListProps) => {
-    if (isError) {
+    if (isError || !data) {
         return <div>조회에 실패했습니다.</div>;
     }
 
