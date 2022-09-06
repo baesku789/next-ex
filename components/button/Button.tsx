@@ -7,7 +7,7 @@ interface ButtonProps {
 
 export default function Button(props:ButtonProps) {
     return (
-        <button {...props.attr}>
+        <button className={'h-48 border-2 rounded-10 border-gray-200 py-10 px-5 hover:bg-gray-100'} {...props.attr}>
             {props.text}
         </button>
     )

@@ -15,7 +15,9 @@ module.exports = {
 			maxWidth: px0_1000,
 			borderWidth: px0_100,
 			height: px0_1000,
-			fontSize:px0_100
+			fontSize:px0_100,
+			borderRadius:px0_100,
+			gap:px0_100
 		},
 	},
 	plugins: [],

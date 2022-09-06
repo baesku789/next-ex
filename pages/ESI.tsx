@@ -4,6 +4,7 @@ import { getESIList } from '../lib/api';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { generateKey } from '../lib/utils';
 import Input from '../components/input/Input';
+import Button from '../components/button/Button';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const queryClient = new QueryClient();
@@ -41,10 +42,14 @@ function ESI() {
 		return <div>No data</div>;
 	}
 
+	const attr = {
+		onClick : () => refetch()
+	}
+
 	return (
 		<div className={'flex items-center flex-col'}>
 			<h1>경제심리지수</h1>
-			<div className={'flex flex-col my-20'}>
+			<div className={'flex gap-10 my-20'}>
 				<Input
 					type="text"
 					placeholder={'202207'}
@@ -59,17 +64,17 @@ function ESI() {
 					maxLength={6}
 					name={'endDate'}
 				/>
+				<Button attr={attr} text={'검색'} />
 			</div>
-			<button onClick={() => refetch()}>검색</button>
 			<div className={'flex'}>
 				{data.map((el, index) => {
 					return (
 						<div
 							key={generateKey(index)}
-							className={'mx-10 first:ml-0'}
+							className={'mx-10 first:ml-0 border-1 border-solid border-black p-10 flex flex-col gap-y-10'}
 						>
 							<div>{el.PRD_DE}</div>
-							<div>
+							<div className={'text-right'}>
 								<strong>{el.DT}</strong>
 							</div>
 						</div>
