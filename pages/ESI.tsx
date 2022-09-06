@@ -5,6 +5,8 @@ import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { generateKey } from '../lib/utils';
 import Input from '../components/input/Input';
 import Button from '../components/button/Button';
+import { ESIListItem } from '../lib/api/api';
+import ESIList from '../components/ESI/ESIList';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const queryClient = new QueryClient();
@@ -22,7 +24,7 @@ function ESI() {
 	const [startDate, setStartDate] = useState(202207);
 	const [endDate, setEndDate] = useState(202208);
 
-	const { data, isError, refetch } = useQuery(['ESIList'], () =>
+	const { data, isError, refetch, isRefetching } = useQuery(['ESIList'], () =>
 		getESIList(startDate, endDate)
 	);
 
@@ -33,14 +35,6 @@ function ESI() {
 			setEndDate(parseInt(e.target.value));
 		}
 	};
-
-	if (isError) {
-		return <div>Error</div>;
-	}
-
-	if (!data) {
-		return <div>No data</div>;
-	}
 
 	const attr = {
 		onClick : () => refetch()
@@ -66,21 +60,7 @@ function ESI() {
 				/>
 				<Button attr={attr} text={'검색'} />
 			</div>
-			<div className={'flex'}>
-				{data.map((el, index) => {
-					return (
-						<div
-							key={generateKey(index)}
-							className={'mx-10 first:ml-0 border-1 border-solid border-black p-10 flex flex-col gap-y-10'}
-						>
-							<div>{el.PRD_DE}</div>
-							<div className={'text-right'}>
-								<strong>{el.DT}</strong>
-							</div>
-						</div>
-					);
-				})}
-			</div>
+			<ESIList data={data} isError={isError} isRefetching={isRefetching}/>
 		</div>
 	);
 }
