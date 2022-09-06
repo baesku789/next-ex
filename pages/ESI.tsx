@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { GetStaticProps } from 'next';
 import { getESIList } from '../lib/api';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
@@ -25,11 +25,11 @@ function ESI() {
 		getESIList(startDate, endDate)
 	);
 
-	const onDateChange = (e) => {
-		if (e.name === 'startDate') {
-			setStartDate(e.target.value);
+	const onDateChange = (e:ChangeEvent<HTMLInputElement>) => {
+		if (e.target.name === 'startDate') {
+			setStartDate(parseInt(e.target.value));
 		} else {
-			setEndDate(e.target.value);
+			setEndDate(parseInt(e.target.value));
 		}
 	};
 
@@ -49,12 +49,15 @@ function ESI() {
 					type="text"
 					placeholder={'202207'}
 					onChange={onDateChange}
-					fontSize={'16px'}
+					maxLength={6}
+					name={'startDate'}
 				/>
 				<Input
 					type="text"
 					placeholder={'202208'}
 					onChange={onDateChange}
+					maxLength={6}
+					name={'endDate'}
 				/>
 			</div>
 			<button onClick={() => refetch()}>검색</button>
