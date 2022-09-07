@@ -15,7 +15,7 @@ export default function ESIListItem ({item, max}:ESIListItemProps) {
         >
             <div>{getFormattedDate(item.PRD_DE)}</div>
             <div className={'flex justify-end'}>
-                <CustomBar width={(getBarData(max,item.DT)/2).toString()} height={'20'}/>
+                <CustomBar width={(getBarData(max,item.DT)*0.7).toFixed().toString()} height={'20'}/>
             </div>
             <div className={'text-right'}>
                 <strong>{item.DT}</strong>

@@ -5,14 +5,14 @@ interface BarProps {
     height:string
 }
 
-export default function CustomBar ({width, height}:BarProps) {
-    const Bar = styled.div `
-        width: ${width}%;
-        height: ${height}px;
+const Bar = styled.div<BarProps> `
+        width: ${props => props.width}%;
+        height: ${props => props.height}px;
         background: black;
-    `
+`
 
+export default function CustomBar (props:BarProps) {
     return (
-        <Bar/>
+        <Bar {...props}/>
     )
 }
