@@ -22,10 +22,13 @@ const ESIList = ({isError, data, isRefetching}:ESIListProps) => {
         return <div>조회중...</div>
     }
 
+    const numberedData = data.map(i => parseFloat(i.DT))
+    const max = Math.max(...numberedData)
+
     return(
         <div className={'flex flex-col h-1/2 overflow-auto w-full'}>
             {data.map((item, index) =>
-                <ESIListItem key={generateKey(index)} item={item} />
+                <ESIListItem key={generateKey(index)} max={max} item={item} />
             )}
         </div>
     )
