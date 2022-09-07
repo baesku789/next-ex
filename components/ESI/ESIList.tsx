@@ -9,7 +9,7 @@ interface ESIListProps {
 }
 
 const ESIList = ({isError, data, isRefetching}:ESIListProps) => {
-    if (isError || !data) {
+    if (isError || !data || data.hasOwnProperty('err')) {
         return <div>조회에 실패했습니다.</div>;
     }
 
@@ -20,6 +20,8 @@ const ESIList = ({isError, data, isRefetching}:ESIListProps) => {
     if(isRefetching){
         return <div>조회중...</div>
     }
+
+    console.log(`data ${data}`);
 
     return(
         <div className={'flex'}>

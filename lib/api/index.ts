@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ESIListItem, KosisListItem } from './api';
 
-const instance = axios.create({
+export const instance = axios.create({
 	baseURL: 'https://kosis.kr/openapi',
 	params: {
 		apiKey: 'MzJkNDQyM2RiYjUzMGQxOWYwOGQ4ODlkMmE1ZTczZDQ=',

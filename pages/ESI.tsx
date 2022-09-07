@@ -19,11 +19,16 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 function ESI() {
-	const [startDate, setStartDate] = useState(202207);
+	const [startDate, setStartDate] = useState(202201);
 	const [endDate, setEndDate] = useState(202208);
 
-	const { data, isError, refetch, isRefetching } = useQuery(['ESIList'], () =>
-		getESIList(startDate, endDate)
+	const { data, isError, refetch, isRefetching } = useQuery(['ESIList'], () => fetch('/api/ESI', {
+		body:JSON.stringify({
+			startDate,
+			endDate
+		}),
+		method:'POST'
+		}).then(res => res.json())
 	);
 
 	const onDateChange = (e:ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +40,9 @@ function ESI() {
 	};
 
 	const attr = {
-		onClick : () => refetch()
+		onClick : () => {
+			refetch();
+		}
 	}
 
 	return (

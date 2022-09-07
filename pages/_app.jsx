@@ -1,10 +1,8 @@
 import '../style/styles.css';
-import {
-	Hydrate,
-	QueryClient,
-	QueryClientProvider,
-} from '@tanstack/react-query';
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import ErrorBoundary from '../components/Errorboundary';
 
 // This default export is required in a new `pages/_app.jsx` file.
 export default function MyApp({ Component, pageProps }) {
@@ -28,7 +26,10 @@ export default function MyApp({ Component, pageProps }) {
 	return getLayout(
 		<QueryClientProvider client={queryClient}>
 			<Hydrate state={pageProps.dehydratedState}>
-				<Component {...pageProps} />
+				<ErrorBoundary FallbackComponent={<div>Error</div>}>
+					<Component {...pageProps} />
+				</ErrorBoundary>
+				<ReactQueryDevtools initialIsOpen={false}/>
 			</Hydrate>
 		</QueryClientProvider>
 	);
