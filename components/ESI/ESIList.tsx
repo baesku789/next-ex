@@ -23,7 +23,7 @@ const ESIList = ({isError, data, isRefetching}:ESIListProps) => {
     }
 
     return(
-        <div className={'flex'}>
+        <div className={'flex flex-col h-1/2 overflow-auto w-full'}>
             {data.map((item, index) =>
                 <ESIListItem key={generateKey(index)} item={item} />
             )}

@@ -50,7 +50,7 @@ function ESI() {
 	}
 
 	return (
-		<div className={'flex items-center flex-col'}>
+		<div className={'flex items-center flex-col h-screen max-w-600 mx-auto'}>
 			<h1>경제심리지수</h1>
 			<div className={'flex gap-10 my-20'}>
 				<Input
