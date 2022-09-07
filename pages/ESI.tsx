@@ -19,8 +19,12 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 function ESI() {
-	const [startDate, setStartDate] = useState(202201);
-	const [endDate, setEndDate] = useState(202208);
+	const defaultStartDate = 202201
+	const defaultEndDate = 202208
+
+	// 조회 기간
+	const [startDate, setStartDate] = useState(defaultStartDate);
+	const [endDate, setEndDate] = useState(defaultEndDate);
 
 	const { data, isError, refetch, isRefetching } = useQuery(['ESIList'], () => fetch('/api/ESI', {
 		body:JSON.stringify({
@@ -51,14 +55,14 @@ function ESI() {
 			<div className={'flex gap-10 my-20'}>
 				<Input
 					type="text"
-					placeholder={'202207'}
+					placeholder={defaultStartDate.toString()}
 					onChange={onDateChange}
 					maxLength={6}
 					name={'startDate'}
 				/>
 				<Input
 					type="text"
-					placeholder={'202208'}
+					placeholder={defaultEndDate.toString()}
 					onChange={onDateChange}
 					maxLength={6}
 					name={'endDate'}

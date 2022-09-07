@@ -23,7 +23,7 @@ export async function getKosisList() {
 	return data;
 }
 
-export async function getESIList(startPrdDe = 202207, endPrdDe = 202208) {
+export async function getESIList(startPrdDe = 202201, endPrdDe = 202208) {
 	const { data } = await instance.get<ESIListItem[]>('/statisticsData.do', {
 		params: {
 			method: 'getList',

@@ -1,10 +1,11 @@
-import { ESIListItem } from '../../lib/api/api';
-import { generateKey } from '../../lib/utils';
+import { ESIListItem as ESIListItemType } from '../../lib/api/api';
 import React from 'react';
+import ESIListItem from './ESIListItem';
+import { generateKey } from '../../lib/utils';
 
 interface ESIListProps {
     isError:boolean
-    data:ESIListItem[]
+    data:ESIListItemType[]
     isRefetching?:boolean
 }
 
@@ -21,23 +22,11 @@ const ESIList = ({isError, data, isRefetching}:ESIListProps) => {
         return <div>조회중...</div>
     }
 
-    console.log(`data ${data}`);
-
     return(
         <div className={'flex'}>
-            {data.map((el, index) => {
-                return (
-                    <div
-                        key={generateKey(index)}
-                        className={'mx-10 first:ml-0 border-1 border-solid border-black p-10 flex flex-col gap-y-10'}
-                    >
-                        <div>{el.PRD_DE}</div>
-                        <div className={'text-right'}>
-                            <strong>{el.DT}</strong>
-                        </div>
-                    </div>
-                );
-            })}
+            {data.map((item, index) =>
+                <ESIListItem key={generateKey(index)} item={item} />
+            )}
         </div>
     )
 }
