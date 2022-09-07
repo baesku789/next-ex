@@ -17,7 +17,8 @@ module.exports = {
 			height: px0_1000,
 			fontSize:px0_100,
 			borderRadius:px0_100,
-			gap:px0_100
+			gap:px0_100,
+			width:px0_1000
 		},
 	},
 	plugins: [],

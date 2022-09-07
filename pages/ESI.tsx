@@ -46,28 +46,30 @@ function ESI() {
 	const attr = {
 		onClick : () => {
 			refetch();
-		}
+		},
 	}
 
 	return (
 		<div className={'flex items-center flex-col h-screen max-w-600 mx-auto pt-20 box-border'}>
 			<h1>경제심리지수</h1>
-			<div className={'flex gap-10 my-20'}>
-				<Input
-					type="text"
-					placeholder={defaultStartDate.toString()}
-					onChange={onDateChange}
-					maxLength={6}
-					name={'startDate'}
-				/>
-				<Input
-					type="text"
-					placeholder={defaultEndDate.toString()}
-					onChange={onDateChange}
-					maxLength={6}
-					name={'endDate'}
-				/>
-				<Button attr={attr} text={'검색'} />
+			<div className={'flex gap-10 my-20 items-center'}>
+				<div className={'flex flex-col row gap-10'}>
+					<Input
+						type="text"
+						placeholder={defaultStartDate.toString()}
+						onChange={onDateChange}
+						maxLength={6}
+						name={'startDate'}
+					/>
+					<Input
+						type="text"
+						placeholder={defaultEndDate.toString()}
+						onChange={onDateChange}
+						maxLength={6}
+						name={'endDate'}
+					/>
+				</div>
+				<Button width={'w-70'} attr={attr} text={'검색'} />
 			</div>
 			<ESIList data={data} isError={isError} isRefetching={isRefetching}/>
 		</div>
