@@ -1,3 +1,5 @@
+import { getFormattedDate } from '../../lib/utils';
+
 interface ESIMaxMinProps {
     max: number|string
     maxDate: number|string
@@ -7,9 +9,9 @@ interface ESIMaxMinProps {
 
 export default function ESIMaxMin ({max, maxDate, minDate, min}:ESIMaxMinProps) {
     return (
-        <div>
-            <div>최고치 : {maxDate} {max}</div>
-            <div>최소치 : {minDate} {min}</div>
+        <div className={'shadow-2xl p-10'}>
+            <div>최고치 : {getFormattedDate(maxDate.toString())} {max}</div>
+            <div>최소치 : {getFormattedDate(minDate.toString())} {min}</div>
         </div>
     )
 }

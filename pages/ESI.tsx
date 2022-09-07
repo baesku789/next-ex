@@ -6,6 +6,7 @@ import Input from '../components/input/Input';
 import Button from '../components/button/Button';
 import ESIList from '../components/ESI/ESIList';
 import { ESIListItem } from '../lib/api/api';
+import ESIMaxMin from '../components/ESI/ESIMaxMin';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const queryClient = new QueryClient();
@@ -50,9 +51,11 @@ function ESI() {
 		},
 	}
 
-	const numberedData = data.map(i => parseInt(i.DT))
+	const numberedData = data.map(i => parseFloat(i.DT))
 	const max = Math.max(...numberedData)
 	const min = Math.min(...numberedData)
+	const maxDate = data.filter(i => i.DT === max.toString())[0].PRD_DE
+	const minDate = data.filter(i => i.DT === min.toString())[0].PRD_DE
 
 	return (
 		<div className={'flex items-center flex-col h-screen max-w-600 mx-auto pt-20 box-border'}>
@@ -76,6 +79,7 @@ function ESI() {
 				</div>
 				<Button width={'w-70'} attr={attr} text={'검색'} />
 			</div>
+			<ESIMaxMin max={max} maxDate={maxDate} min={min} minDate={minDate}/>
 			<ESIList data={data} isError={isError} isRefetching={isRefetching} max={max}/>
 		</div>
 	);
