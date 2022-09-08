@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ErrorBoundary from '../components/Errorboundary';
 import Layout from '../components/layout';
 import { RecoilRoot } from 'recoil';
+import DebugObserver from '../recoil/DebugObserver';
 
 // This default export is required in a new `pages/_app.jsx` file.
 export default function MyApp({ Component, pageProps }) {
@@ -28,6 +29,7 @@ export default function MyApp({ Component, pageProps }) {
 			<Hydrate state={pageProps.dehydratedState}>
 				<ErrorBoundary FallbackComponent={<div>Error</div>}>
 					<RecoilRoot>
+						<DebugObserver/>
 						<Layout>
 							<Component {...pageProps} />
 						</Layout>

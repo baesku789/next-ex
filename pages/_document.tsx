@@ -1,9 +1,6 @@
-import Document, { Html, Head, NextScript, Main, DocumentContext } from 'next/document';
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import { renderToString } from 'react-dom/server';
 import React from 'react';
-import ESI from './ESI';
-import { initialize } from 'next/client';
 
 class MyDocument extends Document {
 	static async getInitialProps(ctx:DocumentContext){
