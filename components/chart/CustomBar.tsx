@@ -1,18 +1,29 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface BarProps {
-    width:string
-    height:string
+    width: string;
+    height: string;
 }
 
-const Bar = styled.div<BarProps> `
-        width: ${props => props.width}%;
-        height: ${props => props.height}px;
-        background: black;
+const IncreaseWidth = keyframes`
+  from {
+    width: 0
+  }
+  to {
+    width: ${props => props.width}
+  }
 `
 
-export default function CustomBar (props:BarProps) {
+const Bar = styled.div<BarProps>`
+  width: ${props => props.width}%;
+  height: ${props => props.height}px;
+  background: linear-gradient(to right, #434343 0%, black 100%);
+  border-radius: 5px;
+  animation: 1s ${IncreaseWidth};
+`;
+
+export default function CustomBar(props: BarProps) {
     return (
-        <Bar {...props}/>
-    )
+        <Bar {...props} />
+    );
 }
