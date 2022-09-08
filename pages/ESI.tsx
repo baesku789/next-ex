@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { GetStaticProps } from 'next';
 import { getESIList } from '../lib/api';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
@@ -8,6 +8,8 @@ import ESIList from '../components/ESI/ESIList';
 import { ESIListItem } from '../lib/api/api';
 import ESIMaxMin from '../components/ESI/ESIMaxMin';
 import Head from 'next/head';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { ESIMax } from '../recoil/ESI';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const queryClient = new QueryClient();
@@ -28,6 +30,8 @@ function ESI() {
 	// 조회 기간
 	const [startDate, setStartDate] = useState(defaultStartDate);
 	const [endDate, setEndDate] = useState(defaultEndDate);
+
+	const setESIMax = useSetRecoilState(ESIMax)
 
 	const { data, isError, refetch, isRefetching } = useQuery<ESIListItem[]>(['ESIList'], () => fetch('/api/ESI', {
 		body:JSON.stringify({
@@ -58,6 +62,10 @@ function ESI() {
 	const maxDate = data.filter(i => i.DT === max.toString())[0].PRD_DE
 	const minDate = data.filter(i => i.DT === min.toString())[0].PRD_DE
 
+	useEffect(() => {
+		setESIMax(max)
+	})
+
 	return (
 		<div className={'flex items-center flex-col h-screen max-w-600 mx-auto pt-20 box-border'}>
 			<Head>
@@ -84,7 +92,7 @@ function ESI() {
 				<Button width={'w-70'} attr={attr} text={'검색'} />
 			</div>
 			<ESIMaxMin max={max} maxDate={maxDate} min={min} minDate={minDate}/>
-			<ESIList data={data} isError={isError} isRefetching={isRefetching} max={max}/>
+			<ESIList data={data} isError={isError} isRefetching={isRefetching}/>
 		</div>
 	);
 }
