@@ -9,9 +9,9 @@ interface ESIMaxMinProps {
 
 export default function ESIMaxMin ({max, maxDate, minDate, min}:ESIMaxMinProps) {
     return (
-        <div className={'shadow-2xl p-10'}>
+        <div className={'shadow-2xl p-10 mb-10'}>
             <div>최고치 : {getFormattedDate(maxDate.toString())} {max}</div>
-            <div>최소치 : {getFormattedDate(minDate.toString())} {min}</div>
+            <div>최저치 : {getFormattedDate(minDate.toString())} {min}</div>
         </div>
     )
 }

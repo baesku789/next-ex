@@ -7,6 +7,7 @@ import Button from '../components/button/Button';
 import ESIList from '../components/ESI/ESIList';
 import { ESIListItem } from '../lib/api/api';
 import ESIMaxMin from '../components/ESI/ESIMaxMin';
+import Head from 'next/head';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const queryClient = new QueryClient();
@@ -59,6 +60,9 @@ function ESI() {
 
 	return (
 		<div className={'flex items-center flex-col h-screen max-w-600 mx-auto pt-20 box-border'}>
+			<Head>
+				<title>경제 심리 지수</title>
+			</Head>
 			<h1>경제심리지수</h1>
 			<div className={'flex gap-10 my-20 items-center'}>
 				<div className={'flex flex-col row gap-10'}>
