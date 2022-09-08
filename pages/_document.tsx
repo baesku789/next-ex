@@ -47,7 +47,7 @@ class MyDocument extends Document {
 				<Head>
 					<link
 						rel="stylesheet"
-						href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
+						href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap"
 					/>
 				</Head>
 				<body>
