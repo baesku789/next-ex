@@ -8,7 +8,7 @@ import ESIList from '../components/ESI/ESIList';
 import { ESIListItem } from '../lib/api/api';
 import ESIMaxMin from '../components/ESI/ESIMaxMin';
 import Head from 'next/head';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { ESIMax } from '../recoil/ESI';
 
 export const getStaticProps: GetStaticProps = async () => {
