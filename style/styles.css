@@ -4,6 +4,9 @@
 
 body {
 	margin: 0 auto;
+
+	font-family: 'Nanum Pen Script', cursive;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 h1 {

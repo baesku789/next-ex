@@ -1,4 +1,4 @@
-export const generateKey = (pre) => {
+export const generateKey = (pre?) => {
 	return `${pre}_${new Date().getTime()}`;
 };
 

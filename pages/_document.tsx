@@ -1,9 +1,6 @@
-import Document, { Html, Head, NextScript, Main, DocumentContext } from 'next/document';
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import { renderToString } from 'react-dom/server';
 import React from 'react';
-import ESI from './ESI';
-import { initialize } from 'next/client';
 
 class MyDocument extends Document {
 	static async getInitialProps(ctx:DocumentContext){
@@ -47,7 +44,7 @@ class MyDocument extends Document {
 				<Head>
 					<link
 						rel="stylesheet"
-						href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
+						href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap"
 					/>
 				</Head>
 				<body>

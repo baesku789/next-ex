@@ -7,10 +7,9 @@ interface ESIListProps {
     isError:boolean
     data:ESIListItemType[]
     isRefetching?:boolean
-    max:number
 }
 
-const ESIList = ({isError, data, isRefetching, max}:ESIListProps) => {
+const ESIList = ({isError, data, isRefetching}:ESIListProps) => {
     if (isError || !data || data.hasOwnProperty('err')) {
         return <div>조회에 실패했습니다.</div>;
     }
@@ -26,7 +25,7 @@ const ESIList = ({isError, data, isRefetching, max}:ESIListProps) => {
     return(
         <div className={'flex flex-col h-1/2 overflow-auto w-full box-border px-10'}>
             {data.map((item, index) =>
-                <ESIListItem key={generateKey(index)} max={max} item={item} />
+                <ESIListItem key={generateKey(index)} item={item} />
             )}
         </div>
     )

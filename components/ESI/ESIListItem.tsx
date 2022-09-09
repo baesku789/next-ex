@@ -2,13 +2,16 @@ import { generateKey, getBarData, getFormattedDate } from '../../lib/utils';
 import React from 'react';
 import { ESIListItem as ESIListItemType } from '../../lib/api/api';
 import CustomBar from '../chart/CustomBar';
+import { useRecoilValue } from 'recoil';
+import { ESIMax } from '../../recoil/ESI';
 
 interface ESIListItemProps {
     item: ESIListItemType
-    max:number
 }
 
-export default function ESIListItem ({item, max}:ESIListItemProps) {
+export default function ESIListItem ({item}:ESIListItemProps) {
+    const max = useRecoilValue(ESIMax)
+
     return (
         <div
             className={'my-10 border-1 border-solid border-black p-10 flex flex-col gap-y-10'}

@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import { getKosisList } from '../lib/api';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import RouteLink from '../components/link/RouteLink';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const queryClient = new QueryClient();
@@ -45,7 +46,9 @@ const Kosis = () => {
 					key={el.LIST_NM}
 				>
 					<div>
-						<strong>{el.LIST_NM}</strong>
+						<RouteLink title={el.LIST_NM}>
+							<strong>{el.LIST_NM}</strong>
+						</RouteLink>
 					</div>
 					<div>{el.VW_NM}</div>
 				</div>

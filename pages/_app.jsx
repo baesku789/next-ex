@@ -3,11 +3,12 @@ import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query
 import { useState } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ErrorBoundary from '../components/Errorboundary';
+import Layout from '../components/layout';
+import { RecoilRoot } from 'recoil';
+import DebugObserver from '../recoil/DebugObserver';
 
 // This default export is required in a new `pages/_app.jsx` file.
 export default function MyApp({ Component, pageProps }) {
-	// Use the layout defined at the page level, if available
-	const getLayout = Component.getLayout || ((page) => page);
 
 	const [queryClient] = useState(
 		() =>
@@ -23,11 +24,16 @@ export default function MyApp({ Component, pageProps }) {
 			})
 	);
 
-	return getLayout(
+	return (
 		<QueryClientProvider client={queryClient}>
 			<Hydrate state={pageProps.dehydratedState}>
 				<ErrorBoundary FallbackComponent={<div>Error</div>}>
-					<Component {...pageProps} />
+					<RecoilRoot>
+						<DebugObserver/>
+						<Layout>
+							<Component {...pageProps} />
+						</Layout>
+					</RecoilRoot>
 				</ErrorBoundary>
 				<ReactQueryDevtools initialIsOpen={false}/>
 			</Hydrate>
