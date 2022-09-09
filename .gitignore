@@ -9,3 +9,9 @@ next-env.d.ts
 node_modules
 yarn.lock
 !/yarn.lock
+
+# yarn
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*
