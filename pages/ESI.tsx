@@ -75,7 +75,7 @@ function ESI() {
 			</Head>
 			<h1>경제심리지수</h1>
 			<div className={'flex gap-10 my-20 items-center px-20 w-full box-border'}>
-				<div className={'flex flex-col row gap-10'}>
+				<div className={'flex flex-col row gap-10 w-4/6'}>
 					<Input
 						type="text"
 						placeholder={defaultStartDate.toString()}
