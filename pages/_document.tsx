@@ -46,7 +46,7 @@ class MyDocument extends Document {
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap"
 					/>
-					<meta content={'initial-scale=1.0 user-scalable=no'} />
+					<meta name={'viewport'} content={'initial-scale=1.0 user-scalable=no'} />
 				</Head>
 				<body>
 					<Main />
