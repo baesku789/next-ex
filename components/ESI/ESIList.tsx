@@ -1,5 +1,5 @@
 import { ESIListItem as ESIListItemType } from '../../lib/api/api';
-import React from 'react';
+import React, { memo } from 'react';
 import ESIListItem from './ESIListItem';
 import { generateKey } from '../../lib/utils';
 
@@ -9,7 +9,7 @@ interface ESIListProps {
     isRefetching?:boolean
 }
 
-const ESIList = ({isError, data, isRefetching}:ESIListProps) => {
+const ESIList = memo(function({isError, data, isRefetching}:ESIListProps) {
     if (isError || !data || data.hasOwnProperty('err')) {
         return <div>조회에 실패했습니다.</div>;
     }
@@ -29,6 +29,8 @@ const ESIList = ({isError, data, isRefetching}:ESIListProps) => {
             )}
         </div>
     )
-}
+})
+
+ESIList.displayName = 'ESIList'
 
 export default ESIList
