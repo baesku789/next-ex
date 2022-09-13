@@ -20,10 +20,12 @@ export default function Threejs() {
     };
 
     useEffect(() => {
+        let renderer;
+
         if (ref.current) {
             const scene = new Scene();
 
-            const renderer = new WebGLRenderer({
+            renderer = new WebGLRenderer({
                 canvas: ref.current,
                 antialias: true,
                 alpha: true
@@ -58,6 +60,12 @@ export default function Threejs() {
                 animate();
             });
         }
+
+        return () => {
+            if (renderer) {
+                renderer.dispose();
+            }
+        };
     }, [ref]);
 
     return (
