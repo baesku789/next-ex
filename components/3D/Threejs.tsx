@@ -1,6 +1,7 @@
-import { Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { Color, DirectionalLight, PerspectiveCamera, Scene, sRGBEncoding, WebGLRenderer } from 'three';
 import { useEffect, useRef } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default function Threejs() {
     const ref = useRef<HTMLCanvasElement>(null);
@@ -10,12 +11,8 @@ export default function Threejs() {
             const loader = new GLTFLoader();
 
             loader.load(url, (gltf) => {
-                const obj = gltf.scene;
-                obj.position.x = 0;
-                obj.position.y = 0;
-                console.log(`scene ${JSON.stringify(scene)}`);
-                scene.add(obj);
-                resolve(obj);
+                scene.add(gltf.scene);
+                resolve(gltf.scene);
             }, undefined, (error) => {
                 reject(error);
             });
@@ -31,12 +28,22 @@ export default function Threejs() {
                 antialias: true,
                 alpha: true
             });
-            renderer.setSize(window.innerWidth * 0.8, window.innerHeight / 2);
+            renderer.setSize(window.innerWidth, window.innerHeight / 2);
+            renderer.outputEncoding = sRGBEncoding;
 
             scene.background = new Color('white');
 
-            const camera = new PerspectiveCamera(30, 1.2);
+            // fov 작을 수록 가까워짐
+            const camera = new PerspectiveCamera(35, 0.9);
+
+            const controls = new OrbitControls(camera, renderer.domElement);
+
             camera.position.set(0, 0, 5);
+            controls.update();
+
+            // White directional light at half intensity shining from the top.
+            const directionalLight = new DirectionalLight(0xffffff, 0.5);
+            scene.add(directionalLight);
 
             const loader = new GLTFLoader();
             loader.load('/3D/shiba/scene.gltf', (gltf) => {
@@ -44,7 +51,7 @@ export default function Threejs() {
 
                 function animate() {
                     requestAnimationFrame(animate);
-                    gltf.scene.rotation.y += 0.01;
+                    controls.update();
                     renderer.render(scene, camera);
                 }
 
