@@ -4,12 +4,13 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { recoilRoutes } from '../recoil/routes';
 import Head from 'next/head';
+import { defaultRoute } from '../const/route/defaultRoute';
 
 const Header = () => {
     const router = useRouter();
     const routes = useRecoilValue(recoilRoutes);
 
-    const currentRoute = routes.filter(route => route.href === router.pathname)[0];
+    const currentRoute = routes.filter(route => route.href === router.pathname)[0] || defaultRoute;
 
     return (
         <>
