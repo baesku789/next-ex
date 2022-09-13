@@ -70,6 +70,8 @@ function ESI() {
 		<div className={'flex items-center flex-col h-screen max-w-600 mx-auto pt-20 box-border'}>
 			<Head>
 				<title>경제 심리 지수</title>
+				<meta property={'og:title'} content={'경제 심리 지수'} />
+				<meta property={'og:description'} content={'통계청에서 제공하는 경제 심리 지수입니다.'} />
 			</Head>
 			<h1>경제심리지수</h1>
 			<div className={'flex gap-10 my-20 items-center px-20'}>
