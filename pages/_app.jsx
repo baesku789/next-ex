@@ -6,6 +6,7 @@ import ErrorBoundary from '../components/Errorboundary';
 import Layout from '../components/layout';
 import { RecoilRoot } from 'recoil';
 import DebugObserver from '../recoil/DebugObserver';
+import Head from 'next/head'
 
 // This default export is required in a new `pages/_app.jsx` file.
 export default function MyApp({ Component, pageProps }) {
@@ -30,6 +31,9 @@ export default function MyApp({ Component, pageProps }) {
 				<ErrorBoundary FallbackComponent={<div>Error</div>}>
 					<RecoilRoot>
 						<DebugObserver/>
+						<Head>
+							<meta name={'viewport'} content={'user-scalable=no'} />
+						</Head>
 						<Layout>
 							<Component {...pageProps} />
 						</Layout>
