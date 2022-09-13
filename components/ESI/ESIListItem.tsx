@@ -14,7 +14,7 @@ export default function ESIListItem ({item}:ESIListItemProps) {
 
     return (
         <div
-            className={'my-10 first:mt-0 last:mb-0 border-1 border-solid border-black p-10 flex flex-col gap-y-10'}
+            className={'my-10 first:mt-0 last:mb-0 border-1 border-solid border-black p-10 flex flex-col gap-y-10 rounded-5'}
         >
             <div>{getFormattedDate(item.PRD_DE)}</div>
             <div className={'flex justify-end'}>
