@@ -1,16 +1,20 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, SimpleInterpolation } from 'styled-components';
 
 interface BarProps {
     width: string;
     height: string;
 }
 
-const IncreaseWidth = keyframes`
+const getPropsWidth = (props) => {
+    return props.width as SimpleInterpolation
+}
+
+const IncreaseWidth = (props) => keyframes`
   from {
     width: 0
   }
   to {
-    width: ${props => props.width}
+    width: ${props.width}
   }
 `
 
