@@ -72,7 +72,7 @@ function ESI() {
 				<title>경제 심리 지수</title>
 			</Head>
 			<h1>경제심리지수</h1>
-			<div className={'flex gap-10 my-20 items-center'}>
+			<div className={'flex gap-10 my-20 items-center px-20'}>
 				<div className={'flex flex-col row gap-10'}>
 					<Input
 						type="text"
