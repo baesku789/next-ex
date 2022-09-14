@@ -2,59 +2,73 @@ import { GetStaticProps } from 'next';
 import { getKosisList } from '../lib/api';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import RouteLink from '../components/link/RouteLink';
+import Image from 'next/image';
+import { getRouteHref } from '../lib/utils';
+import { useRecoilValue } from 'recoil';
+import { recoilRoutes } from '../recoil/routes';
 
 export const getStaticProps: GetStaticProps = async () => {
-	const queryClient = new QueryClient();
+    const queryClient = new QueryClient();
 
-	await queryClient.prefetchQuery(['kosisList'], getKosisList);
+    await queryClient.prefetchQuery(['kosisList'], getKosisList);
 
-	return {
-		props: {
-			dehydratedState: dehydrate(queryClient),
-		},
-	};
+    return {
+        props: {
+            dehydratedState: dehydrate(queryClient)
+        }
+    };
 };
 
 const Kosis = () => {
-	const { data, isRefetching, isError } = useQuery(
-		['kosisList'],
-		getKosisList
-	);
+    const { data, isRefetching, isError } = useQuery(
+        ['kosisList'],
+        getKosisList
+    );
 
-	if (isRefetching) {
-		return <div>refetching...</div>;
-	}
+    const routes = useRecoilValue(recoilRoutes);
 
-	if (isError) {
-		return <div>Error</div>;
-	}
+    if (isRefetching) {
+        return <div>refetching...</div>;
+    }
 
-	if (!data) {
-		return <div>No data</div>;
-	}
+    if (isError) {
+        return <div>Error</div>;
+    }
 
-	return (
-		<div className={'m-auto max-w-screen-sm h-[calc(50vh)] overflow-auto'}>
-			<div className={'sticky top-0 bg-white'}>
-				<h1>통계목록</h1>
-				<div>총 개수 : {data.length}</div>
-			</div>
+    if (!data) {
+        return <div>No data</div>;
+    }
 
-			{data.map((el) => (
-				<div
-					className={'my-10 border-1 border-black pl-10'}
-					key={el.LIST_NM}
-				>
-					<div>
-						<RouteLink title={el.LIST_NM}>
-							<strong>{el.LIST_NM}</strong>
-						</RouteLink>
-					</div>
-					<div>{el.VW_NM}</div>
-				</div>
-			))}
-		</div>
-	);
+    return (
+        <div className={'m-auto max-w-screen-sm h-[calc(50vh)] overflow-auto'}>
+            <div className={'sticky top-0 bg-white'}>
+                <h1>통계목록</h1>
+                <div>총 개수 : {data.length}</div>
+            </div>
+
+            {data.map((el) => (
+                <div
+                    className={'my-10 border-1 border-black pl-10 flex justify-between'}
+                    key={el.LIST_NM}
+                >
+                    <div>
+                        <div>
+                            <RouteLink title={el.LIST_NM}>
+                                <strong>{el.LIST_NM}</strong>
+                            </RouteLink>
+                        </div>
+                        <div>{el.VW_NM}</div>
+                    </div>
+                    {
+                        getRouteHref(routes, el.LIST_NM) &&
+                        <div className={'relative w-24 h-24 my-auto'}>
+                            <Image src={'/images/arrow_forward_black.svg'} layout={'fill'} alt={'arrow'} />
+                        </div>
+                    }
+                </div>
+            ))}
+        </div>
+    );
 };
 
 export default Kosis;

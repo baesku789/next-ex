@@ -3,7 +3,7 @@ export interface AxiosResponse<T> {
 }
 
 export interface KosisListItem {
-	LIST_NM: string;
+	LIST_NM: string; // title
 	VW_CD: string;
 	VW_NM: string;
 }

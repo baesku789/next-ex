@@ -1,7 +1,11 @@
 {
 	"compilerOptions": {
 		"target": "ES2015",
-		"lib": ["dom", "dom.iterable", "esnext"],
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"esnext"
+		],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": false,
@@ -14,15 +18,14 @@
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"moduleResolution": "Node",
-		"baseUrl": ".",
-		"paths": {
-			"@components": ["components/*"],
-			"@pages": ["pages/*"],
-			"@api": ["api/*"],
-			"@lib": ["lib/*"],
-			"@public": ["public"]
-		}
+		"baseUrl": "."
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-	"exclude": ["node_modules"]
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx"
+	],
+	"exclude": [
+		"node_modules"
+	]
 }
