@@ -5,6 +5,8 @@ import { useRecoilValue } from 'recoil';
 import { recoilRoutes } from '../recoil/routes';
 import Head from 'next/head';
 import { defaultRoute } from '../const/route/defaultRoute';
+import ImageTooltip from './tooltip/ImageTooltip';
+import { ESIDescription } from './tooltip/description';
 
 const Header = () => {
     const router = useRouter();
@@ -19,10 +21,12 @@ const Header = () => {
                 <meta property={'og:title'} content={currentRoute.title} />
                 <meta property={'og:description'} content={'통계청에서 제공하는 경제 심리 지수입니다.'} />
             </Head>
-            <div className={'pl-5 border-solid border-gray-50 border-b-2 h-40 flex justify-start items-center'}>
+            <div className={'pl-5 border-solid border-gray-50 border-b-2 h-40 flex justify-start items-center gap-6'}>
                 <Image alt={'home'} onClick={() => router.push('/')} src={'/images/home_black_24dp.svg'} width={24}
                        height={24} />
                 <h1 className={'pl-10'}>{currentRoute.title || ''}</h1>
+                <ImageTooltip height={24} width={24} imgUrl={'/images/question_mark_black_24dp.svg'}
+                              TooltipChildren={() => <ESIDescription />} />
             </div>
         </>
     );
