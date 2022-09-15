@@ -2,14 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	margin: 0 auto;
+:root {
+    --vh: 100%
+}
 
-	font-family: 'Nanum Pen Script', cursive;
-	font-family: 'Noto Sans KR', sans-serif;
+html, body {
+    height: 100vh;
+    height: var(--vh);
+}
+
+body {
+    margin: 0 auto;
+
+    font-family: 'Nanum Pen Script', cursive;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 h1 {
-	font-size: 20px;
-	font-weight: bold;
+    font-size: 20px;
+    font-weight: bold;
 }
