@@ -43,7 +43,7 @@ const Kosis = () => {
 
     return (
         <div className={'m-auto max-w-screen-sm h-[calc(80vh)] overflow-auto px-10 mt-10'}>
-            <div className={'sticky top-0 bg-white'}>
+            <div className={'sticky top-0 bg-white z-10'}>
                 <h1>통계목록</h1>
                 <div>총 개수 : {data.length}</div>
             </div>
