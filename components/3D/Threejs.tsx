@@ -1,22 +1,21 @@
-import { Color, DirectionalLight, PerspectiveCamera, Scene, sRGBEncoding, WebGLRenderer } from 'three';
-import { useEffect, useRef } from 'react';
+import { Color, DirectionalLight, LoadingManager, PerspectiveCamera, Scene, sRGBEncoding, WebGLRenderer } from 'three';
+import { useEffect, useRef, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default function Threejs() {
     const ref = useRef<HTMLCanvasElement>(null);
 
-    const loadGLTF = (url: string, scene: Scene) => {
-        return new Promise((resolve, reject) => {
-            const loader = new GLTFLoader();
+    const manager = new LoadingManager();
 
-            loader.load(url, (gltf) => {
-                scene.add(gltf.scene);
-                resolve(gltf.scene);
-            }, undefined, (error) => {
-                reject(error);
-            });
-        });
+    const [isLoading, setIsLoading] = useState(true);
+
+    manager.onLoad = () => {
+        setIsLoading(false);
+    };
+
+    manager.onError = () => {
+        console.error('에러 발생');
     };
 
     useEffect(() => {
@@ -47,7 +46,7 @@ export default function Threejs() {
             const directionalLight = new DirectionalLight(0xffffff, 0.5);
             scene.add(directionalLight);
 
-            const loader = new GLTFLoader();
+            const loader = new GLTFLoader(manager);
             loader.load('/3D/shiba/scene.gltf', (gltf) => {
                 scene.add(gltf.scene);
 
@@ -69,7 +68,12 @@ export default function Threejs() {
     }, [ref]);
 
     return (
-        <div className={'flex justify-center w-screen'}>
+        <div className={'flex justify-center w-screen relative'}>
+            {
+                isLoading &&
+                <div
+                    className={'w-full h-[calc(50vh)] flex justify-center items-center absolute top-0 bg-white'}>로딩중</div>
+            }
             <canvas id={'Threejs'} ref={ref}></canvas>
         </div>
     );

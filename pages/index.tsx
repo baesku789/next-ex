@@ -9,7 +9,9 @@ const DynamicThreejs = dynamic(() => import('../components/3D/Threejs'), {
 function HomePage() {
     return (
         <nav>
-            <DynamicThreejs />
+            <div className={'h-[calc(50vh)]'}>
+                <DynamicThreejs />
+            </div>
             <div className={'w-full flex justify-center items-center'}>
                 <Link href={'/kosis'}>
                     <div className={'flex gap-5'}>
