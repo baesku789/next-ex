@@ -27,7 +27,8 @@
 		"react-dom": "^18.2.0",
 		"recoil": "^0.7.5",
 		"styled-components": "^5.3.5",
-		"three": "^0.144.0"
+		"three": "^0.144.0",
+		"typewriter-effect": "^2.19.0"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.1.1",
