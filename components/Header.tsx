@@ -25,8 +25,11 @@ const Header = () => {
                 <Image alt={'home'} onClick={() => router.push('/')} src={'/images/home_black_24dp.svg'} width={24}
                        height={24} />
                 <h1 className={'pl-10'}>{currentRoute.title || ''}</h1>
-                <ImageTooltip height={24} width={24} imgUrl={'/images/question_mark_black_24dp.svg'}
-                              TooltipChildren={() => <ESIDescription />} />
+                {
+                    currentRoute.tooltipChildren && currentRoute.tooltipChildren === 'ESIDescription' &&
+                    <ImageTooltip height={24} width={24} imgUrl={'/images/question_mark_black_24dp.svg'}
+                                  TooltipChildren={() => <ESIDescription />} />
+                }
             </div>
         </>
     );

@@ -1,13 +1,12 @@
 import Image from 'next/image';
 import { Tooltip } from './Tooltip';
 import { useState } from 'react';
-import { ESIDescription } from './description';
 
 interface ImageTooltipProps {
     imgUrl: string;
     width: number | string;
     height: number | string;
-    TooltipChildren: typeof ESIDescription;
+    TooltipChildren: () => JSX.Element;
 }
 
 export default function ImageTooltip({ imgUrl, width, height, TooltipChildren }: ImageTooltipProps) {
