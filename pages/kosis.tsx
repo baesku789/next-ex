@@ -1,11 +1,11 @@
 import { GetStaticProps } from 'next';
 import { getKosisList } from '../lib/api';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import RouteLink from '../components/link/RouteLink';
 import Image from 'next/image';
 import { getRouteHref } from '../lib/utils';
 import { useRecoilValue } from 'recoil';
 import { recoilRoutes } from '../recoil/routes';
+import { useRouter } from 'next/router';
 
 export const getStaticProps: GetStaticProps = async () => {
     const queryClient = new QueryClient();
@@ -27,6 +27,8 @@ const Kosis = () => {
 
     const routes = useRecoilValue(recoilRoutes);
 
+    const router = useRouter();
+
     if (isRefetching) {
         return <div>refetching...</div>;
     }
@@ -40,22 +42,24 @@ const Kosis = () => {
     }
 
     return (
-        <div className={'m-auto max-w-screen-sm h-[calc(50vh)] overflow-auto'}>
+        <div className={'m-auto max-w-screen-sm h-[calc(80vh)] overflow-auto px-10 mt-10'}>
             <div className={'sticky top-0 bg-white'}>
                 <h1>통계목록</h1>
                 <div>총 개수 : {data.length}</div>
             </div>
 
             {data.map((el) => (
+
                 <div
-                    className={'my-10 border-1 border-black pl-10 flex justify-between'}
+                    className={'my-10 border-1 border-black pl-10 flex justify-between rounded-5'}
                     key={el.LIST_NM}
+                    onClick={() => router.push(getRouteHref(routes, el.LIST_NM))}
                 >
                     <div>
                         <div>
-                            <RouteLink title={el.LIST_NM}>
-                                <strong>{el.LIST_NM}</strong>
-                            </RouteLink>
+
+                            <strong>{el.LIST_NM}</strong>
+
                         </div>
                         <div>{el.VW_NM}</div>
                     </div>
@@ -66,6 +70,7 @@ const Kosis = () => {
                         </div>
                     }
                 </div>
+
             ))}
         </div>
     );
