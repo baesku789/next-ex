@@ -19,14 +19,13 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default function Prices() {
-
     const { data, isError } = useQuery(
         ['PricesList'],
         getPricesList
     );
 
     return (
-        <ListContainer>
+        <ListContainer className={'flex flex-col gap-10'}>
             <ListHeader data={data} />
             <DataContainer data={data} isError={isError} type={'router'} />
         </ListContainer>
