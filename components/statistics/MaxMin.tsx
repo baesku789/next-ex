@@ -7,7 +7,7 @@ interface ESIMaxMinProps {
     minDate: number | string;
 }
 
-export default function ESIMaxMin({ max, maxDate, minDate, min }: ESIMaxMinProps) {
+export default function MaxMin({ max, maxDate, minDate, min }: ESIMaxMinProps) {
     return (
         <div className={'shadow-md p-10 mb-10 rounded-5'}>
             <div>최고치 : {getFormattedDate(maxDate.toString())} {max}</div>
