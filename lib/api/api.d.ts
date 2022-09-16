@@ -8,7 +8,7 @@ export interface StatisticsListItem {
     VW_NM: string;
 }
 
-export interface ESIListItem {
+export interface StatisticsDataItem {
     PRD_DE: string; // 202207
     DT: string;
 }

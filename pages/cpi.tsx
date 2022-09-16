@@ -1,20 +1,20 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { GetStaticProps } from 'next';
-import { getESIList } from '../lib/api';
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import Input from '../components/input/Input';
-import Button from '../components/button/Button';
-import { StatisticsDataItem as ESIListItemAPI } from '../lib/api/api';
 import { useSetRecoilState } from 'recoil';
 import { ESIMax } from '../recoil/ESI';
-import DataContainer from '../components/container/DataContainer';
-import MaxMin from '../components/statistics/MaxMin';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { StatisticsListItem } from '../lib/api/api';
 import { getProcessedESIData } from '../lib/preprocessor';
+import Input from '../components/input/Input';
+import Button from '../components/button/Button';
+import MaxMin from '../components/statistics/MaxMin';
+import DataContainer from '../components/container/DataContainer';
+import { GetStaticProps } from 'next';
+import { getCPIList } from '../lib/api';
 
 export const getStaticProps: GetStaticProps = async () => {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(['ESIList'], () => getESIList());
+    await queryClient.prefetchQuery(['CpiList'], () => getCPIList());
 
     return {
         props: {
@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async () => {
     };
 };
 
-function ESI() {
+export default function Cpi() {
     const defaultStartDate = 202201;
     const defaultEndDate = 202208;
 
@@ -33,7 +33,12 @@ function ESI() {
 
     const setESIMax = useSetRecoilState(ESIMax);
 
-    const { data, isError, refetch, isRefetching } = useQuery<ESIListItemAPI[]>(['ESIList'], () => fetch('/api/ESI', {
+    const {
+        data,
+        isError,
+        refetch,
+        isRefetching
+    } = useQuery<StatisticsListItem[]>(['CpiList'], () => fetch('/api/cpi', {
             body: JSON.stringify({
                 startDate,
                 endDate
@@ -88,5 +93,3 @@ function ESI() {
         </div>
     );
 }
-
-export default ESI;

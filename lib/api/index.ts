@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ESIListItem, StatisticsListItem } from './api';
+import { StatisticsDataItem, StatisticsListItem } from './api';
 
 export const instance = axios.create({
     baseURL: 'https://kosis.kr/openapi',
@@ -36,7 +36,7 @@ export async function getPricesList() {
 }
 
 export async function getESIList(startPrdDe = 202201, endPrdDe = 202208) {
-    const { data } = await instance.get<ESIListItem[]>('/statisticsData.do', {
+    const { data } = await instance.get<StatisticsDataItem[]>('/statisticsData.do', {
         params: {
             method: 'getList',
             userStatsId: 'baesku789/301/DT_513Y001/2/1/20220905184615_1',
@@ -49,4 +49,18 @@ export async function getESIList(startPrdDe = 202201, endPrdDe = 202208) {
     return data;
 }
 
+export async function getCPIList(startPrdDe = 202201, endPrdDe = 202208) {
+    const { data } = await instance.get<StatisticsDataItem[]>('/statisticsData.do', {
+        params: {
+            method: 'getList',
+            userStatsId: 'baesku789/101/DT_1J20003/2/1/20220916170738',
+            prdSe: 'M',
+            newEstPrdCnt: 1,
+            startPrdDe,
+            endPrdDe
+        }
+    });
+
+    return data;
+}
 

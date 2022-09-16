@@ -6,7 +6,7 @@ import { recoilRoutes } from '../recoil/routes';
 import Head from 'next/head';
 import { defaultRoute } from '../const/route/defaultRoute';
 import ImageTooltip from './tooltip/ImageTooltip';
-import { ESIDescription } from './tooltip/description';
+import { CpiDescription, ESIDescription } from './tooltip/description';
 
 const Header = () => {
     const router = useRouter();
@@ -26,9 +26,14 @@ const Header = () => {
                        height={24} />
                 <h1 className={'pl-10'}>{currentRoute.title || ''}</h1>
                 {
-                    currentRoute.tooltipChildren && currentRoute.tooltipChildren === 'ESIDescription' &&
+                    currentRoute.tooltipChildren && currentRoute.tooltipChildren === 'ESI' &&
                     <ImageTooltip alt={'물음표'} height={24} width={24} imgUrl={'/images/question_mark_black_24dp.svg'}
                                   TooltipChildren={() => <ESIDescription />} />
+                }
+                {
+                    currentRoute.tooltipChildren && currentRoute.tooltipChildren === 'cpi' &&
+                    <ImageTooltip alt={'물음표'} height={24} width={24} imgUrl={'/images/question_mark_black_24dp.svg'}
+                                  TooltipChildren={() => <CpiDescription />} />
                 }
             </div>
         </>

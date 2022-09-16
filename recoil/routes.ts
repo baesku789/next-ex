@@ -1,9 +1,9 @@
 import { generateKey } from '../lib/utils';
 import { atom } from 'recoil';
 
-export type RecoilRoutesType = { title: string, href: string, tooltipChildren?: string }[]
+export type RecoilRoutesType = { title: string, href: string, tooltipChildren?: 'ESI' | 'cpi' }[]
 
-export const recoilRoutes = atom({
+export const recoilRoutes = atom<RecoilRoutesType>({
     key: `recoilRoutes_${generateKey()}`,
     default: [
         {
@@ -17,7 +17,16 @@ export const recoilRoutes = atom({
         {
             title: '경제심리지수',
             href: '/ESI',
-            tooltipChildren: 'ESIDescription'
+            tooltipChildren: 'ESI'
+        },
+        {
+            title: '소비자물가지수',
+            href: '/cpi',
+            tooltipChildren: 'cpi'
+        },
+        {
+            title: '소비자물가조사',
+            href: '/cpList'
         }
     ]
 });

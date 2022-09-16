@@ -3,19 +3,21 @@ import Image from 'next/image';
 import { useRecoilValue } from 'recoil';
 import { recoilRoutes } from '../../recoil/routes';
 import { useRouter } from 'next/router';
+import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
-interface RouterItemProps {
+interface RouterItemProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
     name: string;
-    sort: string;
+    sort?: string;
 }
 
-export default function RouterItem({ name, sort }: RouterItemProps) {
+export default function RouterItem({ name, sort, className }: RouterItemProps) {
     const routes = useRecoilValue(recoilRoutes);
     const router = useRouter();
 
     return (
         <div
-            className={'border-1 border-black pl-10 flex justify-between rounded-5'}
+            className={twMerge(`border-1 border-black pl-10 flex justify-between rounded-5 ${className}`)}
             onClick={() => router.push(getRouteHref(routes, name))}
         >
             <div>

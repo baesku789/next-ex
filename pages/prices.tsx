@@ -26,7 +26,7 @@ export default function Prices() {
 
     return (
         <ListContainer className={'flex flex-col gap-10'}>
-            <ListHeader data={data} />
+            <ListHeader length={data.length} />
             <DataContainer data={data} isError={isError} type={'router'} />
         </ListContainer>
     );

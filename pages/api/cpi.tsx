@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { cors, runMiddleware } from './cors';
-import { StatisticsDataItem } from '../../lib/api/api';
-import { instance } from '../../lib/api';
+import { getCPIList } from '../../lib/api';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const body = JSON.parse(req.body);
@@ -11,15 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
         if (typeof startDate === 'number' && typeof endDate === 'number') {
-            const { data } = await instance.get<StatisticsDataItem[]>('/statisticsData.do', {
-                params: {
-                    method: 'getList',
-                    userStatsId: 'baesku789/301/DT_513Y001/2/1/20220905184615_1',
-                    prdSe: 'M',
-                    startPrdDe: startDate || 202207,
-                    endPrdDe: endDate || 202208
-                }
-            });
+            const data = await getCPIList(startDate, endDate);
 
             return res.status(200).json(data);
         }

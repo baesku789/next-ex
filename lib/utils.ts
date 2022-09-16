@@ -23,6 +23,11 @@ export const getBarData = (max: number, current: number | string) => {
     return (current / max) * 100;
 };
 
+/**
+ * 제목에 맞는 href 반환
+ * @param routes
+ * @param title
+ */
 export const getRouteHref = (routes: RecoilRoutesType, title) => {
     return routes.filter(route => route.title === title)[0] ? routes.filter(route => route.title === title)[0].href : '';
 };

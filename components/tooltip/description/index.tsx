@@ -11,3 +11,14 @@ export const ESIDescription = () => {
         </div>
     );
 };
+
+export const CpiDescription = () => {
+    return (
+        <div className={'flex flex-col gap-8'}>
+            <p>
+                대표적인 인플레이션 지표로 <strong>소비자가 일상 소비생활에서 구입하는 상품과 서비스의 가격 변동</strong>을 조사함으로써 도시가계의 평균적인
+                생계비나 화폐의 구매력 변동을 측정하는 물가지수
+            </p>
+        </div>
+    );
+};
