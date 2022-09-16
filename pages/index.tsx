@@ -19,7 +19,7 @@ function HomePage() {
 
 
         typewriter
-            .typeString('통계청에서 제공하는 API를 기반으로 데이터를 보여주고 있습니다.')
+            .typeString('통계청에서 제공하는 API를 기반으로 <br> 데이터를 보여주고 있습니다.')
             .start();
     }, []);
 
@@ -36,7 +36,7 @@ function HomePage() {
                     </div>
                 </Link>
             </div>
-            <div className={'p-20'} id={'app'}></div>
+            <div className={'p-20 text-center'} id={'app'}></div>
         </nav>
     );
 }
