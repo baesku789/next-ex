@@ -53,7 +53,7 @@ export async function getCPIList(startPrdDe = 202201, endPrdDe = 202208) {
     const { data } = await instance.get<StatisticsDataItem[]>('/statisticsData.do', {
         params: {
             method: 'getList',
-            userStatsId: 'baesku789/101/DT_1J20003/2/1/20220916170738',
+            userStatsId: 'baesku789/101/DT_1J20003/2/1/20220916182202_1',
             prdSe: 'M',
             newEstPrdCnt: 1,
             startPrdDe,
