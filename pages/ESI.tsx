@@ -7,10 +7,9 @@ import Button from '../components/button/Button';
 import { ESIListItem as ESIListItemAPI } from '../lib/api/api';
 import { useSetRecoilState } from 'recoil';
 import { ESIMax } from '../recoil/ESI';
-import { generateKey } from '../lib/utils';
 import DataContainer from '../components/container/DataContainer';
-import BarItem from '../components/items/BarItem';
 import MaxMin from '../components/statistics/MaxMin';
+import { getProcessedESIData } from '../lib/preprocessor';
 
 export const getStaticProps: GetStaticProps = async () => {
     const queryClient = new QueryClient();
@@ -43,6 +42,8 @@ function ESI() {
         }).then(res => res.json())
     );
 
+    console.log(`data ${JSON.stringify(data)}`);
+
     const onDateChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === 'startDate') {
             setStartDate(parseInt(e.target.value));
@@ -57,29 +58,25 @@ function ESI() {
         }
     };
 
-    const numberedData = data.map(i => parseFloat(i.DT));
-    const max = Math.max(...numberedData);
-    const min = Math.min(...numberedData);
-    const maxDate = data.filter(i => i.DT === max.toString())[0].PRD_DE;
-    const minDate = data.filter(i => i.DT === min.toString())[0].PRD_DE;
+    const { min, max, maxDate, minDate } = getProcessedESIData(data);
 
     useEffect(() => {
         setESIMax(max);
-    });
+    }, [max]);
 
     return (
         <div className={'flex items-center flex-col h-screen max-w-600 mx-auto box-border'}>
             <div className={'flex gap-10 my-20 justify-center items-center px-20 w-full box-border'}>
                 <div className={'flex flex-col row gap-10 w-4/6'}>
                     <Input
-                        type='text'
+                        type='number'
                         placeholder={defaultStartDate.toString()}
                         onChange={onDateChange}
                         maxLength={6}
                         name={'startDate'}
                     />
                     <Input
-                        type='text'
+                        type='number'
                         placeholder={defaultEndDate.toString()}
                         onChange={onDateChange}
                         maxLength={6}
@@ -88,12 +85,8 @@ function ESI() {
                 </div>
                 <Button width={'w-70'} attr={attr} text={'검색'} />
             </div>
-            <MaxMin max={max} maxDate={maxDate} min={min} minDate={minDate} />
-            <DataContainer data={data} isError={isError} isRefetching={isRefetching}>
-                {data.map((item, index) =>
-                    <BarItem key={generateKey(index)} date={item.PRD_DE} max={max} index={item.DT} />
-                )}
-            </DataContainer>
+            {data && !isError && <MaxMin max={max} maxDate={maxDate} min={min} minDate={minDate} />}
+            <DataContainer data={data} isError={isError} isRefetching={isRefetching} />
         </div>
     );
 }

@@ -21,7 +21,7 @@ const StyledTooltip = styled.div<TooltipProps>`
     border-right: 7px solid white;
     content: "";
     height: 0;
-    right: 48%;
+    right: 47.9%;
     position: absolute;
     top: -7px;
     width: 0;

@@ -1,6 +1,6 @@
 import { getBarData, getFormattedDate } from '../../lib/utils';
 import CustomBar from '../chart/CustomBar';
-import React from 'react';
+import React, { memo } from 'react';
 
 interface BarItemProps {
     date: string;
@@ -8,7 +8,7 @@ interface BarItemProps {
     index: string;
 }
 
-export default function BarItem({ date, max, index }: BarItemProps) {
+function BarItem({ date, max, index }: BarItemProps) {
     return (
         <div
             className={'my-10 first:mt-0 last:mb-0 border-1 border-solid border-black p-10 flex flex-col gap-y-10 rounded-5'}
@@ -23,3 +23,5 @@ export default function BarItem({ date, max, index }: BarItemProps) {
         </div>
     );
 }
+
+export default memo(BarItem);

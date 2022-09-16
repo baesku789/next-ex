@@ -1,19 +1,23 @@
-import React, { ReactNode } from 'react';
+import React, { memo } from 'react';
+import BarItem from '../items/BarItem';
+import { generateKey } from '../../lib/utils';
+import { useRecoilValue } from 'recoil';
+import { ESIMax } from '../../recoil/ESI';
 
 interface DataContainerProps<T> {
     isError: boolean;
     data: T;
     isRefetching: boolean;
-    children: ReactNode;
 }
 
-export default function DataContainer<T extends Array<any>>({
-                                                                isError,
-                                                                data,
-                                                                isRefetching,
-                                                                children
-                                                            }: DataContainerProps<T>) {
-    if (isError || !data || data.hasOwnProperty('err')) {
+function DataContainer<T extends Array<any>>({
+                                                 isError,
+                                                 data,
+                                                 isRefetching
+                                             }: DataContainerProps<T>) {
+    const max = useRecoilValue(ESIMax);
+
+    if (isError || !data) {
         return <div>조회에 실패했습니다.</div>;
     }
 
@@ -25,9 +29,14 @@ export default function DataContainer<T extends Array<any>>({
         return <div>조회중...</div>;
     }
 
+
     return (
         <div className={'flex flex-col h-[calc(100vh-300px)] overflow-auto w-full box-border px-10'}>
-            {children}
+            {data.map((item, index) =>
+                <BarItem key={generateKey(index)} date={item.PRD_DE} max={max} index={item.DT} />
+            )}
         </div>
     );
 }
+
+export default memo(DataContainer);
