@@ -6,14 +6,16 @@ import { ESIMax } from '../../recoil/ESI';
 
 interface DataContainerProps<T> {
     isError: boolean;
-    data: T;
+    data: T | undefined;
     isRefetching: boolean;
+    type: 'bar';
 }
 
 function DataContainer<T extends Array<any>>({
                                                  isError,
                                                  data,
-                                                 isRefetching
+                                                 isRefetching,
+                                                 type
                                              }: DataContainerProps<T>) {
     const max = useRecoilValue(ESIMax);
 
@@ -29,11 +31,15 @@ function DataContainer<T extends Array<any>>({
         return <div>조회중...</div>;
     }
 
-
     return (
         <div className={'flex flex-col h-[calc(100vh-300px)] overflow-auto w-full box-border px-10'}>
-            {data.map((item, index) =>
-                <BarItem key={generateKey(index)} date={item.PRD_DE} max={max} index={item.DT} />
+            {data.map((item, index) => {
+                    if (type === 'bar') {
+                        return (
+                            <BarItem key={generateKey(index)} date={item.PRD_DE} max={max} index={item.DT} />
+                        );
+                    }
+                }
             )}
         </div>
     );

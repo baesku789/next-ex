@@ -86,7 +86,7 @@ function ESI() {
                 <Button width={'w-70'} attr={attr} text={'검색'} />
             </div>
             {data && !isError && <MaxMin max={max} maxDate={maxDate} min={min} minDate={minDate} />}
-            <DataContainer data={data} isError={isError} isRefetching={isRefetching} />
+            <DataContainer data={data} isError={isError} isRefetching={isRefetching} type={'bar'} />
         </div>
     );
 }
