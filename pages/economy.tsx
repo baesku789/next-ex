@@ -25,9 +25,8 @@ const Economy = () => {
     );
 
     return (
-        <ListContainer>
+        <ListContainer className={'flex flex-col gap-10'}>
             <ListHeader data={data} />
-
             <DataContainer data={data} isError={isError} type={'router'} />
         </ListContainer>
     );
