@@ -32,7 +32,7 @@ function HomePage() {
                 <Link href={'/kosis'}>
                     <div className={'flex gap-5'}>
                         <h1>통계 목록 보기</h1>
-                        <Image src={'/images/east_black_24dp.svg'} width={24} height={24} />
+                        <Image alt={'화살표'} src={'/images/east_black_24dp.svg'} width={24} height={24} />
                     </div>
                 </Link>
             </div>

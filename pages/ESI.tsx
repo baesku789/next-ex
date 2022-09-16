@@ -60,7 +60,7 @@ function ESI() {
 
     useEffect(() => {
         setESIMax(max);
-    }, [max]);
+    }, [max, setESIMax]);
 
     return (
         <div className={'flex items-center flex-col h-screen max-w-600 mx-auto box-border px-10'}>

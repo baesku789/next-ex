@@ -1,6 +1,6 @@
 import '../style/styles.css';
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ErrorBoundary from '../components/Errorboundary';
 import Layout from '../components/layout';
@@ -25,11 +25,11 @@ export default function MyApp({ Component, pageProps }) {
             })
     );
 
-    let vh = 0;
+    const vh = useRef()
 
     useEffect(() => {
-        vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        vh.current = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh.current}px`);
     }, []);
 
     return (

@@ -27,7 +27,7 @@ const Header = () => {
                 <h1 className={'pl-10'}>{currentRoute.title || ''}</h1>
                 {
                     currentRoute.tooltipChildren && currentRoute.tooltipChildren === 'ESIDescription' &&
-                    <ImageTooltip height={24} width={24} imgUrl={'/images/question_mark_black_24dp.svg'}
+                    <ImageTooltip alt={'물음표'} height={24} width={24} imgUrl={'/images/question_mark_black_24dp.svg'}
                                   TooltipChildren={() => <ESIDescription />} />
                 }
             </div>

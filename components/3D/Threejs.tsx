@@ -1,12 +1,12 @@
 import { Color, DirectionalLight, LoadingManager, PerspectiveCamera, Scene, sRGBEncoding, WebGLRenderer } from 'three';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default function Threejs() {
     const ref = useRef<HTMLCanvasElement>(null);
 
-    const manager = new LoadingManager();
+    const manager = useMemo(() => new LoadingManager(), []);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -65,7 +65,7 @@ export default function Threejs() {
                 renderer.dispose();
             }
         };
-    }, [ref]);
+    }, [ref, manager]);
 
     return (
         <div className={'flex justify-center w-screen relative'}>
