@@ -5,5 +5,5 @@
   "bracketSpacing": true,
   "singleAttributePerLine": true,
   "trailingComma": "all",
-  "bracketSameLine": true
+  "bracketSameLine": false
 }

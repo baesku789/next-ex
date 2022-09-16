@@ -3,12 +3,13 @@ import BarItem from '../items/BarItem';
 import { generateKey } from '../../lib/utils';
 import { useRecoilValue } from 'recoil';
 import { ESIMax } from '../../recoil/ESI';
+import RouterItem from '../items/RouterItem';
 
 interface DataContainerProps<T> {
     isError: boolean;
     data: T | undefined;
-    isRefetching: boolean;
-    type: 'bar';
+    type: 'bar' | 'router';
+    isRefetching?: boolean;
 }
 
 function DataContainer<T extends Array<any>>({
@@ -28,15 +29,19 @@ function DataContainer<T extends Array<any>>({
     }
 
     if (isRefetching) {
-        return <div>조회중...</div>;
+        return <div>재조회중...</div>;
     }
 
     return (
-        <div className={'flex flex-col h-[calc(100vh-300px)] overflow-auto w-full box-border px-10'}>
+        <div className={'flex flex-col h-[calc(100vh-300px)] overflow-auto w-full box-border gap-10'}>
             {data.map((item, index) => {
                     if (type === 'bar') {
                         return (
                             <BarItem key={generateKey(index)} date={item.PRD_DE} max={max} index={item.DT} />
+                        );
+                    } else if (type === 'router') {
+                        return (
+                            <RouterItem key={item.LIST_NM} name={item.LIST_NM} sort={item.VW_NM} />
                         );
                     }
                 }

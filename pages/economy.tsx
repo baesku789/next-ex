@@ -1,11 +1,10 @@
 import { GetStaticProps } from 'next';
 import { getKosisList } from '../lib/api';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
-import { getRouteHref } from '../lib/utils';
-import { useRecoilValue } from 'recoil';
-import { recoilRoutes } from '../recoil/routes';
-import { useRouter } from 'next/router';
+import ListContainer from '../components/container/ListContainer';
+import DataContainer from '../components/container/DataContainer';
+import React from 'react';
+import ListHeader from '../components/header/ListHeader';
 
 export const getStaticProps: GetStaticProps = async () => {
     const queryClient = new QueryClient();
@@ -20,57 +19,17 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Economy = () => {
-    const { data, isRefetching, isError } = useQuery(
+    const { data, isError } = useQuery(
         ['kosisList'],
         getKosisList
     );
 
-    const routes = useRecoilValue(recoilRoutes);
-
-    const router = useRouter();
-
-    if (isRefetching) {
-        return <div>재조회중...</div>;
-    }
-
-    if (isError) {
-        return <div>에러 발생</div>;
-    }
-
-    if (!data) {
-        return <div>데이터가 없습니다.</div>;
-    }
-
     return (
-        <div className={'m-auto max-w-screen-sm h-[calc(80vh)] overflow-auto px-10 mt-10'}>
-            <div className={'sticky top-0 bg-white z-10'}>
-                <h1>통계목록</h1>
-                <div>총 개수 : {data.length}</div>
-            </div>
+        <ListContainer>
+            <ListHeader data={data} />
 
-            {data.map((el) => (
-                <div
-                    className={'my-10 border-1 border-black pl-10 flex justify-between rounded-5'}
-                    key={el.LIST_NM}
-                    onClick={() => router.push(getRouteHref(routes, el.LIST_NM))}
-                >
-                    <div>
-                        <div>
-
-                            <strong>{el.LIST_NM}</strong>
-
-                        </div>
-                        <div>{el.VW_NM}</div>
-                    </div>
-                    {
-                        getRouteHref(routes, el.LIST_NM) &&
-                        <div className={'relative w-24 h-24 my-auto'}>
-                            <Image src={'/images/arrow_forward_black.svg'} layout={'fill'} alt={'arrow'} />
-                        </div>
-                    }
-                </div>
-            ))}
-        </div>
+            <DataContainer data={data} isError={isError} type={'router'} />
+        </ListContainer>
     );
 };
 

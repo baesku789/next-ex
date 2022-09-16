@@ -42,8 +42,6 @@ function ESI() {
         }).then(res => res.json())
     );
 
-    console.log(`data ${JSON.stringify(data)}`);
-
     const onDateChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === 'startDate') {
             setStartDate(parseInt(e.target.value));
@@ -65,7 +63,7 @@ function ESI() {
     }, [max]);
 
     return (
-        <div className={'flex items-center flex-col h-screen max-w-600 mx-auto box-border'}>
+        <div className={'flex items-center flex-col h-screen max-w-600 mx-auto box-border px-10'}>
             <div className={'flex gap-10 my-20 justify-center items-center px-20 w-full box-border'}>
                 <div className={'flex flex-col row gap-10 w-4/6'}>
                     <Input
