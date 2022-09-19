@@ -1,15 +1,15 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import { getESIList } from '../lib/api';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import Input from '../components/input/Input';
-import Button from '../components/button/Button';
 import { StatisticsDataItem as ESIListItemAPI } from '../lib/api/api';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ESIMax } from '../recoil/ESI';
 import DataContainer from '../components/container/DataContainer';
 import MaxMin from '../components/statistics/MaxMin';
 import { getProcessedESIData } from '../lib/preprocessor';
+import { recoilDate } from '../recoil/date';
+import DateSearch from '../components/date/DateSearch';
 
 export const getStaticProps: GetStaticProps = async () => {
     const queryClient = new QueryClient();
@@ -24,12 +24,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 function ESI() {
-    const defaultStartDate = 202201;
-    const defaultEndDate = 202208;
-
-    // 조회 기간
-    const [startDate, setStartDate] = useState(defaultStartDate);
-    const [endDate, setEndDate] = useState(defaultEndDate);
+    const { startDate, endDate } = useRecoilValue(recoilDate);
 
     const setESIMax = useSetRecoilState(ESIMax);
 
@@ -42,20 +37,6 @@ function ESI() {
         }).then(res => res.json())
     );
 
-    const onDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.name === 'startDate') {
-            setStartDate(parseInt(e.target.value));
-        } else {
-            setEndDate(parseInt(e.target.value));
-        }
-    };
-
-    const attr = {
-        onClick: () => {
-            refetch();
-        }
-    };
-
     const { min, max, maxDate, minDate } = getProcessedESIData(data);
 
     useEffect(() => {
@@ -64,25 +45,7 @@ function ESI() {
 
     return (
         <div className={'flex items-center flex-col h-screen max-w-600 mx-auto box-border px-10'}>
-            <div className={'flex gap-10 my-20 justify-center items-center px-20 w-full box-border'}>
-                <div className={'flex flex-col row gap-10 w-4/6'}>
-                    <Input
-                        type='number'
-                        placeholder={defaultStartDate.toString()}
-                        onChange={onDateChange}
-                        maxLength={6}
-                        name={'startDate'}
-                    />
-                    <Input
-                        type='number'
-                        placeholder={defaultEndDate.toString()}
-                        onChange={onDateChange}
-                        maxLength={6}
-                        name={'endDate'}
-                    />
-                </div>
-                <Button width={'w-70'} attr={attr} text={'검색'} />
-            </div>
+            <DateSearch refetch={refetch} />
             {data && !isError && <MaxMin max={max} maxDate={maxDate} min={min} minDate={minDate} />}
             <DataContainer data={data} isError={isError} isRefetching={isRefetching} type={'bar'} />
         </div>
