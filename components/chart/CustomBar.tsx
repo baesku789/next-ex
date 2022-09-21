@@ -3,11 +3,12 @@ import styled, { keyframes, SimpleInterpolation } from 'styled-components';
 interface BarProps {
     width: string;
     height: string;
+    direction?: 'vertical';
 }
 
 const getPropsWidth = (props) => {
-    return props.width as SimpleInterpolation
-}
+    return props.width as SimpleInterpolation;
+};
 
 const IncreaseWidth = (props) => keyframes`
   from {
@@ -16,14 +17,28 @@ const IncreaseWidth = (props) => keyframes`
   to {
     width: ${props.width}
   }
-`
+`;
+
+const IncreaseHeight = (props) => keyframes`
+  from {
+    height: 0
+  }
+  to {
+    height: ${props.height}
+  }
+`;
 
 const Bar = styled.div<BarProps>`
   width: ${props => props.width}%;
-  height: ${props => props.height}px;
+  // direction === vertical 일 경우 스크롤 처리가 되기 때문에 px이 더 적합
+  height: ${props => props.height}${props => props.direction ? '%' : 'px'};
   background: linear-gradient(to right, #434343 0%, black 100%);
   border-radius: 5px;
-  animation: 1s ${IncreaseWidth};
+  animation: 1s ${props => !props.direction ? IncreaseWidth : IncreaseHeight};
+
+  &:hover {
+    animation-play-state: paused;
+  }
 `;
 
 export default function CustomBar(props: BarProps) {

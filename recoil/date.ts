@@ -1,7 +1,8 @@
 import { atom } from 'recoil';
+import { generateKey } from '../lib/utils';
 
 export const recoilDate = atom({
-    key: 'Date',
+    key: `Date_${generateKey()}`,
     default:
         {
             startDate: 202201,

@@ -4,11 +4,12 @@ import { generateKey } from '../../lib/utils';
 import { useRecoilValue } from 'recoil';
 import { ESIMax } from '../../recoil/ESI';
 import RouterItem from '../items/RouterItem';
+import Chart from '../chart/Chart';
 
 interface DataContainerProps<T> {
     isError: boolean;
     data: T | undefined;
-    type: 'bar' | 'router';
+    type: 'bar' | 'router' | 'chart';
     isRefetching?: boolean;
 }
 
@@ -33,11 +34,11 @@ function DataContainer<T extends Array<any>>({
     }
 
     return (
-        <div className={'flex flex-col h-[calc(100vh-300px)] overflow-auto w-full box-border gap-10'}>
+        <div className={'w-full flex flex-col h-[calc(100vh-300px)] overflow-auto w-full box-border gap-10'}>
             {data.map((item, index) => {
                     if (type === 'bar') {
                         return (
-                            <BarItem key={generateKey(index)} date={item.PRD_DE} max={max} index={item.DT} />
+                            <BarItem key={generateKey(index)} date={item.PRD_DE} max={max} current={item.DT} />
                         );
                     } else if (type === 'router') {
                         return (
@@ -46,6 +47,9 @@ function DataContainer<T extends Array<any>>({
                     }
                 }
             )}
+            {
+                type === 'chart' && <Chart data={data} key={`${generateKey()}`} />
+            }
         </div>
     );
 }

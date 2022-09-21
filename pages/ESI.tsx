@@ -44,10 +44,10 @@ function ESI() {
     }, [max, setESIMax]);
 
     return (
-        <div className={'flex items-center flex-col h-screen max-w-600 mx-auto box-border px-10'}>
+        <div className={'flex items-center flex-col h-[calc(100vh-40px)] max-w-600 mx-auto box-border px-10'}>
             <DateSearch refetch={refetch} />
             {data && !isError && <MaxMin max={max} maxDate={maxDate} min={min} minDate={minDate} />}
-            <DataContainer data={data} isError={isError} isRefetching={isRefetching} type={'bar'} />
+            <DataContainer data={data} isError={isError} isRefetching={isRefetching} type={'chart'} />
         </div>
     );
 }
