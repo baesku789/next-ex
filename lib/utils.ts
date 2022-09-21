@@ -5,10 +5,11 @@ export const generateKey = (pre?) => {
 };
 
 // 202202 => 2022년 02월
-export const getFormattedDate = (date: string) => {
+export const getFormattedDate = (date: string, type?: 'dot') => {
     const year = date.slice(0, 4);
     const month = date.slice(4);
 
+    if (type && type === 'dot') return `${year}.${month}`;
     return `${year}년 ${month}월`;
 };
 

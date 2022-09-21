@@ -1,14 +1,10 @@
-import styled, { keyframes, SimpleInterpolation } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface BarProps {
     width: string;
     height: string;
     direction?: 'vertical';
 }
-
-const getPropsWidth = (props) => {
-    return props.width as SimpleInterpolation;
-};
 
 const IncreaseWidth = (props) => keyframes`
   from {
