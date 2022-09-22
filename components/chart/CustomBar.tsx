@@ -5,7 +5,7 @@ interface BarProps {
     width: string;
     height: string;
     direction?: 'vertical';
-    children: ReactNode;
+    children?: ReactNode;
 }
 
 const IncreaseWidth = (props) => keyframes`
