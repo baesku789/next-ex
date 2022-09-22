@@ -1,6 +1,6 @@
-import { ESIListItem } from '../api/api';
+import { StatisticsDataItem } from '../api/api';
 
-export const getProcessedESIData = (data: ESIListItem[] | undefined) => {
+export const getProcessedESIData = (data: StatisticsDataItem[] | undefined) => {
     if (!data) return {
         max: undefined,
         min: undefined,
