@@ -35,7 +35,7 @@ function DataContainer<T extends Array<any>>({
 
     return (
         <div
-            className={`w-full flex flex-col ${type === 'chart' && 'justify-end overflow-hidden'} h-[calc(100vh-300px)] overflow-auto w-full box-border gap-10`}>
+            className={`w-full flex flex-col ${type === 'chart' && 'justify-center overflow-hidden'} h-[calc(100vh-300px)] overflow-auto w-full box-border gap-10`}>
             {data.map((item, index) => {
                     if (type === 'bar') {
                         return (
