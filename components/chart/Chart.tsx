@@ -10,10 +10,15 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  height: 50%;
+  height: 60%;
   box-sizing: border-box;
   width: calc(100% - 20px);
   margin: 0 auto;
+  border: 1px solid lightgray;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  padding-left: 10px;
+  padding-top: 20px;
 `;
 
 export default function Chart({ data }: ChartProps) {
@@ -27,7 +32,7 @@ export default function Chart({ data }: ChartProps) {
                     const isLast = index === data.length - 1;
                     return (<ChartColumn key={generateKey(index)}
                                          date={getFormattedDate(item.PRD_DE, 'dot')} max={max} item={item.DT}
-                                         isLast={isLast} />);
+                                         isLast={isLast} index={index} />);
                 })
             }
         </Container>
