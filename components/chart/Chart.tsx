@@ -23,9 +23,12 @@ export default function Chart({ data }: ChartProps) {
     return (
         <Container>
             {
-                data.map((item, index) =>
-                    <ChartColumn key={generateKey(index)}
-                                 date={getFormattedDate(item.PRD_DE, 'dot')} max={max} item={item.DT} />)
+                data.map((item, index) => {
+                    const isLast = index === data.length - 1;
+                    return (<ChartColumn key={generateKey(index)}
+                                         date={getFormattedDate(item.PRD_DE, 'dot')} max={max} item={item.DT}
+                                         isLast={isLast} />);
+                })
             }
         </Container>
     );

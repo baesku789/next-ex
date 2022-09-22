@@ -7,10 +7,10 @@ interface ChartColumnProps {
     max: number;
     item: string;
     date: string;
-    index?: number;
+    isLast: boolean;
 }
 
-export default function ChartColumn({ max, item, date, index }: ChartColumnProps) {
+export default function ChartColumn({ max, item, date, isLast }: ChartColumnProps) {
     const [hover, setHover] = useState(false);
 
     const ref = useRef<HTMLDivElement>();
@@ -23,6 +23,8 @@ export default function ChartColumn({ max, item, date, index }: ChartColumnProps
 
     useEffect(() => {
         globalThis.addEventListener('click', clickOutside);
+
+        if (isLast) setHover(true)
 
         return () => {
             globalThis.removeEventListener('click', clickOutside);
