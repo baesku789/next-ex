@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ESIMax } from '../recoil/ESI';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import { StatisticsListItem } from '../lib/api/api';
+import { StatisticsDataItem } from '../lib/api/api';
 import { getProcessedESIData } from '../lib/preprocessor';
 import MaxMin from '../components/statistics/MaxMin';
 import DataContainer from '../components/container/DataContainer';
@@ -33,7 +33,7 @@ export default function Cpi() {
         isError,
         refetch,
         isRefetching
-    } = useQuery<StatisticsListItem[]>(['CpiList'], () => fetch('/api/cpi', {
+    } = useQuery<StatisticsDataItem[]>(['CpiList'], () => fetch('/api/cpi', {
             body: JSON.stringify({
                 startDate,
                 endDate
