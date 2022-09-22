@@ -1,11 +1,12 @@
 import { getBarData, getFormattedDate } from '../../lib/utils';
 import CustomBar from '../chart/CustomBar';
-import React, { memo } from 'react';
+import React, { memo, ReactNode } from 'react';
 
 interface BarItemProps {
     date: string;
     max: number;
     current: string;
+    children: ReactNode;
 }
 
 function BarItem({ date, max, current }: BarItemProps) {
