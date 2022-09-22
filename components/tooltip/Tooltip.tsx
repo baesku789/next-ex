@@ -19,6 +19,8 @@ const StyledTooltip = styled.div<TooltipProps>`
   font-size: ${props => props.fontSize || '14px'};
   z-index: 999;
   justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
 
   &:after {
     content: "";

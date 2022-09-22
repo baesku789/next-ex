@@ -1,9 +1,11 @@
 import styled, { keyframes } from 'styled-components';
+import { ReactNode } from 'react';
 
 interface BarProps {
     width: string;
     height: string;
     direction?: 'vertical';
+    children: ReactNode;
 }
 
 const IncreaseWidth = (props) => keyframes`
@@ -25,6 +27,7 @@ const IncreaseHeight = (props) => keyframes`
 `;
 
 const Bar = styled.div<BarProps>`
+  position: relative;
   width: ${props => props.width}%;
   // direction === vertical 일 경우 스크롤 처리가 되기 때문에 px이 더 적합
   height: ${props => props.height}${props => props.direction ? '%' : 'px'};
@@ -39,6 +42,6 @@ const Bar = styled.div<BarProps>`
 
 export default function CustomBar(props: BarProps) {
     return (
-        <Bar {...props} />
+        <Bar {...props} ></Bar>
     );
 }
