@@ -1,7 +1,7 @@
 import { getBarData } from '../../lib/utils';
 import CustomBar from './CustomBar';
 import { Tooltip } from '../tooltip/Tooltip';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface ChartColumnProps {
     max: number;
@@ -13,8 +13,25 @@ interface ChartColumnProps {
 export default function ChartColumn({ max, item, date, index }: ChartColumnProps) {
     const [hover, setHover] = useState(false);
 
+    const ref = useRef<HTMLDivElement>();
+
+    const clickOutside = (e: Event) => {
+        if (!ref.current || !ref.current.contains(e.target as Node)) {
+            setHover(false);
+        }
+    };
+
+    useEffect(() => {
+        globalThis.addEventListener('click', clickOutside);
+
+        return () => {
+            globalThis.removeEventListener('click', clickOutside);
+        };
+    }, []);
+
     return (
         <div
+            ref={ref}
             className={'relative w-full h-full flex flex-col justify-end items-center'}
             onClick={() => setHover(true)}
         >
