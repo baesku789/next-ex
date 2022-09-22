@@ -6,7 +6,7 @@ interface BarItemProps {
     date: string;
     max: number;
     current: string;
-    children: ReactNode;
+    children?: ReactNode;
 }
 
 function BarItem({ date, max, current }: BarItemProps) {
